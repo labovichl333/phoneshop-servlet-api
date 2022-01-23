@@ -83,6 +83,7 @@ public class ArrayListProductDao implements ProductDao {
         }
         finally {
             writeLock.unlock();
+
         }
 
     }
