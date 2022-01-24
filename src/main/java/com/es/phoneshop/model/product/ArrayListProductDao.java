@@ -59,7 +59,7 @@ public class ArrayListProductDao implements ProductDao {
     }
 
     @Override
-    public void save(Product product) throws IncorrectIdExeption {
+    public void save(Product product) throws NotExistIdExeption {
         writeLock.lock();
         try {
             if (product.getId() == null) {
@@ -72,7 +72,7 @@ public class ArrayListProductDao implements ProductDao {
                 if (productForUpdate.isPresent()) {
                     products.set(products.indexOf(productForUpdate.get()), product);
                 } else {
-                    throw new IncorrectIdExeption();
+                    throw new NotExistIdExeption();
                 }
             }
         } finally {

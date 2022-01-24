@@ -5,6 +5,6 @@ import java.util.List;
 public interface ProductDao {
     Product getProduct(Long id) throws ProductNotFoundExeption;
     List<Product> findProducts();
-    void save(Product product) throws IncorrectIdExeption;
+    void save(Product product) throws NotExistIdExeption;
     void delete(Long id) throws ProductNotFoundExeption;
 }

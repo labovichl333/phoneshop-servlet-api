@@ -53,7 +53,7 @@ public class ArrayListProductDaoTest {
         assertNotNull(result2);
     }
 
-    @Test(expected = IncorrectIdExeption.class)
+    @Test(expected = NotExistIdExeption.class)
     public void testSaveProductWhithIncorrectId() {
         Product product = (new Product(10000L, "for  test ", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Samsung/Samsung%20Galaxy%20S.jpg"));
         productDao.save(product);
