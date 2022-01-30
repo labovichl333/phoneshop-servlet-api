@@ -39,7 +39,7 @@ public class ArrayListProductDao implements ProductDao {
     public List<Product> findProducts(String query, SortField sortField, SortOrder sortOrder) {
         readLock.lock();
         Comparator<Product> comparator = Comparator.comparing(product -> {
-            if (SortField.description == sortField) {
+            if (SortField.DESCRIPTION == sortField) {
                 return (Comparable) product.getDescription();
             } else {
                 return (Comparable) product.getPrice();
@@ -50,33 +50,36 @@ public class ArrayListProductDao implements ProductDao {
                 return products.stream()
                         .filter(this::productHasPrice)
                         .filter(this::productIsInStock)
-                        .sorted(sortOrder == SortOrder.asc ? comparator : comparator.reversed())
+                        .sorted(sortOrder == SortOrder.ASC ? comparator : comparator.reversed())
                         .collect(Collectors.toList());
             } else if (sortField == null) {
-                String[] queryWords = query.split(" ");
-                return products.stream()
-                        .filter(product -> Arrays.stream(queryWords).anyMatch(queryWord -> product.getDescription().contains(queryWord)))
-                        .filter(this::productHasPrice)
-                        .filter(this::productIsInStock)
-                        .sorted((product1, product2) -> (int) (Arrays.stream(queryWords).
-                                filter(queryWord -> product2.getDescription().contains(queryWord))
-                                .count() - Arrays.stream(queryWords)
-                                .filter(queryWord -> product1.getDescription().contains(queryWord))
-                                .count()))
-                        .collect(Collectors.toList());
+                return findProductsByRelevance(query);
             } else /*sortField != null*/ {
-                String[] queryWords = query.split(" ");
                 return products.stream()
-                        .filter(product -> Arrays.stream(queryWords).anyMatch(queryWord -> product.getDescription().contains(queryWord)))
+                        .filter(product -> Arrays.stream(query.split(" ")).anyMatch(queryWord -> product.getDescription().contains(queryWord)))
                         .filter(this::productHasPrice)
                         .filter(this::productIsInStock)
-                        .sorted(sortOrder == SortOrder.asc ? comparator : comparator.reversed())
+                        .sorted(sortOrder == SortOrder.ASC ? comparator : comparator.reversed())
                         .collect(Collectors.toList());
             }
 
         } finally {
             readLock.unlock();
         }
+    }
+
+    private List<Product> findProductsByRelevance(String query){
+        String[] queryWords = query.split(" ");
+        return products.stream()
+                .filter(product -> Arrays.stream(queryWords).anyMatch(queryWord -> product.getDescription().contains(queryWord)))
+                .filter(this::productHasPrice)
+                .filter(this::productIsInStock)
+                .sorted((product1, product2) -> (int) (Arrays.stream(queryWords).
+                        filter(queryWord -> product2.getDescription().contains(queryWord))
+                        .count() - Arrays.stream(queryWords)
+                        .filter(queryWord -> product1.getDescription().contains(queryWord))
+                        .count()))
+                .collect(Collectors.toList());
     }
 
     private boolean productIsInStock(Product product) {

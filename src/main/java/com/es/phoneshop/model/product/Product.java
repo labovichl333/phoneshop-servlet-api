@@ -1,6 +1,7 @@
 package com.es.phoneshop.model.product;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Date;
@@ -30,7 +31,6 @@ public class Product {
         this.stock = stock;
         this.imageUrl = imageUrl;
         priceHistoryList=new ArrayList<>();
-        priceHistoryList.add(new PriceHistory(price,new Date()));
     }
 
     public Product(String code, String description, BigDecimal price, Currency currency, int stock, String imageUrl) {

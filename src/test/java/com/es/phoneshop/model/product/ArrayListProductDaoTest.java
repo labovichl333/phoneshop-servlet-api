@@ -6,7 +6,11 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 
 public class ArrayListProductDaoTest {
@@ -25,7 +29,7 @@ public class ArrayListProductDaoTest {
         productDao.save(product);
         int len1=productDao.findProducts(null,null,null).size();
         int len2=productDao.findProducts("Samsung",null,null).size();
-        int len3=productDao.findProducts("Samsung",SortField.price,SortOrder.desc).size();
+        int len3=productDao.findProducts("Samsung",SortField.PRICE,SortOrder.DESC).size();
 
         assertTrue(len1>0);
         assertTrue(len2>0);
@@ -78,14 +82,14 @@ public class ArrayListProductDaoTest {
 
     @Test(expected = NotExistIdExeption.class)
     public void testSaveProductWhithIncorrectId() {
-        Product product = (new Product(10000L, "for  test ", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "Samsung/Samsung%20Galaxy%20S.jpg"));
+        Product product = new Product(10000L, "for  test ", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "Samsung/Samsung%20Galaxy%20S.jpg");
 
         productDao.save(product);
     }
 
     @Test(expected = ProductNotFoundExeption.class)
     public void testDeleteProduct() throws ProductNotFoundExeption {
-        Product product = (new Product("for delete test ", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "Samsung%20Galaxy%20S.jpg"));
+        Product product = new Product("for delete test ", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "Samsung%20Galaxy%20S.jpg");
 
         productDao.save(product);
         productDao.delete(product.getId());

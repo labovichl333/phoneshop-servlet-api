@@ -64,7 +64,7 @@
                                 <c:forEach var="priceHistory" items="${product.priceHistoryList}">
                                     <tr>
                                         <td>
-                                            <fmt:formatDate value="${priceHistory.startDate}" pattern="yyyy-MM-dd"/>
+                                            ${priceHistory.startDate}
                                         </td>
                                         <td>
                                             <fmt:formatNumber value="${priceHistory.price}" type="currency"
