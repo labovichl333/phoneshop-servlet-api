@@ -1,0 +1,36 @@
+#container {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+}
+
+.link .tip {
+  visibility: hidden;
+  width: 0;
+  height: 100px;
+  opacity: 0;
+  background-color: #008CBA;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 105%;
+  transition: 0.5s ease;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.link:hover .tip {
+  visibility: visible;
+  width: 150px;
+  height: auto;
+  opacity: 1;
+}
