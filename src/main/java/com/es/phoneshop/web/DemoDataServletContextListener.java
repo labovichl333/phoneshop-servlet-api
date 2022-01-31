@@ -25,9 +25,7 @@ public class DemoDataServletContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         boolean insertDemoData = Boolean.parseBoolean(servletContextEvent.getServletContext().getInitParameter("demoData"));
         if (insertDemoData)
-            for (Product product : getSampleProducts()) {
-                productDao.save(product);
-            }
+            getSampleProducts().stream().forEach(product -> productDao.save(product));
     }
 
     @Override
@@ -52,7 +50,7 @@ public class DemoDataServletContextListener implements ServletContextListener {
         result.add(new Product("simc61", "Siemens C61", new BigDecimal(80), usd, 30, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Siemens/Siemens%20C61.jpg"));
         result.add(new Product("simsxg75", "Siemens SXG75", new BigDecimal(150), usd, 40, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Siemens/Siemens%20SXG75.jpg"));
         return result.stream()
-                .peek(product ->product.getPriceHistory().add(new PriceHistory(product.getPrice(), LocalDate.now())))
+                .peek(product -> product.getPriceHistory().add(new PriceHistory(product.getPrice(), LocalDate.now())))
                 .collect(Collectors.toList());
     }
 }
