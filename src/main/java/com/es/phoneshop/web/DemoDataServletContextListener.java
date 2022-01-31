@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DemoDataServletContextListener implements ServletContextListener {
     private ProductDao productDao;
@@ -50,9 +51,8 @@ public class DemoDataServletContextListener implements ServletContextListener {
         result.add(new Product("simc56", "Siemens C56", new BigDecimal(70), usd, 20, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Siemens/Siemens%20C56.jpg"));
         result.add(new Product("simc61", "Siemens C61", new BigDecimal(80), usd, 30, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Siemens/Siemens%20C61.jpg"));
         result.add(new Product("simsxg75", "Siemens SXG75", new BigDecimal(150), usd, 40, "https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/Siemens/Siemens%20SXG75.jpg"));
-        for (Product product : result) {
-            product.getPriceHistoryList().add(new PriceHistory(product.getPrice(), LocalDate.now()));
-        }
-        return result;
+        return result.stream()
+                .peek(product ->product.getPriceHistory().add(new PriceHistory(product.getPrice(), LocalDate.now())))
+                .collect(Collectors.toList());
     }
 }

@@ -61,7 +61,7 @@
                                             </tr>
                                         </thread>
 
-                                <c:forEach var="priceHistory" items="${product.priceHistoryList}">
+                                <c:forEach var="priceHistory" items="${product.priceHistory}">
                                     <tr>
                                         <td>
                                             ${priceHistory.startDate}
