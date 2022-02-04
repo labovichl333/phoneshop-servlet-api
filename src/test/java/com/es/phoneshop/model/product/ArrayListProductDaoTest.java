@@ -2,6 +2,7 @@ package com.es.phoneshop.model.product;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
@@ -23,17 +24,17 @@ public class ArrayListProductDaoTest {
     }
 
     @Test
-    public void testFindProductHasResult(){
+    public void testFindProductHasResult() {
         Product product = new Product("for test", "Samsung Galaxy S", new BigDecimal(100), usd, 1, "20S.jpg");
 
         productDao.save(product);
-        int len1=productDao.findProducts(null,null,null).size();
-        int len2=productDao.findProducts("Samsung",null,null).size();
-        int len3=productDao.findProducts("Samsung",SortField.PRICE,SortOrder.DESC).size();
+        int len1 = productDao.findProducts(null, null, null).size();
+        int len2 = productDao.findProducts("Samsung", null, null).size();
+        int len3 = productDao.findProducts("Samsung", SortField.PRICE, SortOrder.DESC).size();
 
-        assertTrue(len1>0);
-        assertTrue(len2>0);
-        assertTrue(len3>0);
+        assertTrue(len1 > 0);
+        assertTrue(len2 > 0);
+        assertTrue(len3 > 0);
     }
 
     @Test
@@ -42,7 +43,7 @@ public class ArrayListProductDaoTest {
         Product productWithoutPrice = new Product("for test", "Samsung Galaxy S", null, usd, 8, "Samsung%20Galaxy%20S.jpg");
 
         productDao.save(productOutOfStock);
-        List<Product> productList = productDao.findProducts(null,null,null);
+        List<Product> productList = productDao.findProducts(null, null, null);
 
         assertFalse(productList.contains(productOutOfStock));
         assertFalse(productList.contains(productWithoutPrice));
@@ -62,7 +63,7 @@ public class ArrayListProductDaoTest {
 
     @Test
     public void testUpdateProduct() throws NotExistIdExeption {
-        Product startProduct = new Product( "for test 2", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "Samsung%20Galaxy%20S.jpg");
+        Product startProduct = new Product("for test 2", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "Samsung%20Galaxy%20S.jpg");
         Product product1 = new Product(0L, "for test 2", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "Galaxy%20S.jpg");
         Product product2 = new Product(0L, "for test 3", "Samsung Galaxy S", new BigDecimal(100), usd, 100, "Samsung/Samsung%20Galaxy%20S.jpg");
 
