@@ -1,0 +1,11 @@
+
+#line_block {
+  width:100px;
+  height:150px;
+  float:left;
+  margin: 0 15px 15px 0;
+  text-align:center;
+  padding: 10px;
+  border: 1px solid black;
+}
+

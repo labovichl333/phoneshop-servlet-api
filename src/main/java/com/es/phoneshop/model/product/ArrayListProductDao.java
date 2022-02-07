@@ -68,7 +68,7 @@ public class ArrayListProductDao implements ProductDao {
         }
     }
 
-    private List<Product> findProductsByRelevance(String query){
+    private List<Product> findProductsByRelevance(String query) {
         String[] queryWords = query.split(" ");
         return products.stream()
                 .filter(product -> Arrays.stream(queryWords).anyMatch(queryWord -> product.getDescription().contains(queryWord)))

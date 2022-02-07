@@ -6,7 +6,6 @@
 
 <jsp:useBean id="products" type="java.util.ArrayList" scope="request"/>
 <tags:master pageTitle="Product List">
-
     <p>
         Welcome to Expert-Soft training!
     </p>
@@ -45,7 +44,7 @@
                 <td class="price">
                     <div id="container">
                         <div class="link">
-                            <a href="" >
+                            <a href="">
                                 <fmt:formatNumber value="${product.price}" type="currency"
                                                   currencySymbol="${product.currency.symbol}"/>
                             </a>
@@ -64,7 +63,7 @@
                                 <c:forEach var="priceHistory" items="${product.priceHistory}">
                                     <tr>
                                         <td>
-                                            ${priceHistory.startDate}
+                                                ${priceHistory.startDate}
                                         </td>
                                         <td>
                                             <fmt:formatNumber value="${priceHistory.price}" type="currency"
@@ -81,4 +80,5 @@
             </tr>
         </c:forEach>
     </table>
+    <jsp:include page="recentlyViewed.jsp"/>
 </tags:master>

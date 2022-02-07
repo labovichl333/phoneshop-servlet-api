@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-
 <tags:master pageTitle="Error">
     <h1>Sorry something went wrong</h1>
 </tags:master>
