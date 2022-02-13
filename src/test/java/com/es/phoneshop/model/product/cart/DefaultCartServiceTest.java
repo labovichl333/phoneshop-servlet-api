@@ -57,4 +57,29 @@ public class DefaultCartServiceTest {
         assertTrue(cart.getItems().size() == 1);
     }
 
+    @Test
+    public void deleteProductTest() throws OutOfStockExeption {
+        int quantity = 5;
+        Long productId = 0L;
+        cartService.add(cart, productId, quantity);
+
+        cartService.delete(cart, productId);
+
+        assertTrue(quantity == cart.getTotalQuantity() + quantity);
+
+    }
+
+    @Test
+    public void correctUpdateTest() throws OutOfStockExeption {
+        Product productWithStock100AndId1 = new Product(null, null, new BigDecimal(10),
+                null, 100, null);
+        productDao.save(productWithStock100AndId1);
+        cartService.add(cart, 1L, 1);
+        int startQuantity = cart.getTotalQuantity();
+
+        cartService.update(cart, 1L, 11);
+
+        assertTrue(cart.getTotalQuantity() == startQuantity + 10);
+    }
+
 }

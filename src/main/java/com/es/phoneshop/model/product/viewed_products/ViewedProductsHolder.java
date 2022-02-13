@@ -2,10 +2,11 @@ package com.es.phoneshop.model.product.viewed_products;
 
 import com.es.phoneshop.model.product.Product;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ViewedProductsHolder {
+public class ViewedProductsHolder implements Serializable {
     private int maxCountOfSavingProducts;
     private List<Product> products;
 

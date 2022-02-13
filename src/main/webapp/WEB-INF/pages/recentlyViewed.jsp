@@ -9,6 +9,7 @@
         Recently viewed
     </h1>
 </c:if>
+<p>
 <table>
     <c:forEach var="product" items="${ViewedProductsHolder.getProducts()}">
         <div id="line_block">
@@ -25,4 +26,5 @@
         </div>
     </c:forEach>
 </table>
+</p>
 
