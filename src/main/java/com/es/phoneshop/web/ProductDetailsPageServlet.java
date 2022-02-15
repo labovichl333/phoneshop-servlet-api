@@ -63,6 +63,10 @@ public class ProductDetailsPageServlet extends HttpServlet {
             req.setAttribute("error", "Out of stock, avalible " + e.getStockAvalible());
             doGet(req, resp);
             return;
+        } catch (IllegalArgumentException illegalArgumentExeption) {
+            req.setAttribute("error", "Quantity must be positive");
+            doGet(req, resp);
+            return;
         }
 
         resp.sendRedirect(req.getContextPath() + "/products/" + productId + "?message=Product added to cart");

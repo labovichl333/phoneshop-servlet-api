@@ -9,6 +9,16 @@
     <p>
         Welcome to Expert-Soft training!
     </p>
+    <c:if test="${not empty param.message}">
+        <p class="message">
+                ${param.message}
+        </p>
+    </c:if>
+    <c:if test="${not empty error}">
+        <p class="error">
+            There was an error adding to cart
+        </p>
+    </c:if>
     <form>
         <input name="query" value="${param.query}">
         <button>Search</button>
@@ -29,6 +39,12 @@
                 <tags:sortLink sort="price" order="desc" value="&#9660;"></tags:sortLink>
             </td>
 
+            <td class="quantity">
+                Quantity
+            </td>
+            <td>
+                Add to cart
+            </td>
         </tr>
         </thead>
         <c:forEach var="product" items="${products}">
@@ -77,6 +93,24 @@
                     </div>
 
                 </td>
+                <form method="post" action="${pageContext.request.contextPath}/products">
+                    <td class="quantity">
+                        <input type="text" name="quantity" value="${not empty error and product.id==errorProductId?
+                         param.quantity : 1  }" class="quantity">
+                        <input type="hidden" name="productId" value="${product.id}">
+
+                        <c:if test="${not empty error and product.id==errorProductId}">
+                            <p class="error">
+                                    ${error}
+                            </p>
+                        </c:if>
+                    </td>
+                    <td>
+                        <button>
+                            Add to cart
+                        </button>
+                    </td>
+                </form>
             </tr>
         </c:forEach>
     </table>
