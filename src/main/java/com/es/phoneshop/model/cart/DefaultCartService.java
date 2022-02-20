@@ -1,9 +1,9 @@
-package com.es.phoneshop.model.product.cart;
+package com.es.phoneshop.model.cart;
 
-import com.es.phoneshop.model.product.ArrayListProductDao;
+import com.es.phoneshop.model.dao.impl.ArrayListProductDao;
 import com.es.phoneshop.model.product.OutOfStockExeption;
 import com.es.phoneshop.model.product.Product;
-import com.es.phoneshop.model.product.ProductDao;
+import com.es.phoneshop.model.dao.ProductDao;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
 
 public class DefaultCartService implements CartService {
-    public static final String CART_SESSION_ATTRIBUTE = "cart";
+    public static final String CART_SESSION_ATTRIBUTE = CartService.class.getSimpleName()+"cart";
     private ProductDao productDao = ArrayListProductDao.getInstance();
     private final Lock writeLock = new ReentrantReadWriteLock().writeLock();
 
@@ -119,5 +119,12 @@ public class DefaultCartService implements CartService {
 
     private static class Holder {
         static final DefaultCartService INSTANCE = new DefaultCartService();
+    }
+
+    @Override
+    public void cleanCart(Cart cart){
+        cart.getItems().clear();
+        cart.setTotalQuantity(0);
+        cart.setTotalCost(BigDecimal.ZERO);
     }
 }

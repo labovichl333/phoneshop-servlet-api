@@ -4,7 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/styles/priceHictory.css">
 
-<jsp:useBean id="cart" type="com.es.phoneshop.model.product.cart.Cart" scope="session"/>
+<jsp:useBean id="cart" type="com.es.phoneshop.model.cart.Cart" scope="request"/>
 <tags:master pageTitle="Cart">
     <c:if test="${not empty errors}">
         <p class="error">
@@ -98,6 +98,11 @@
             </p>
         </form>
     </c:if>
-    <form id="deleteCartItem" method="post">
-    </form>
+    <c:if test="${ not empty cart.items}">
+        <form action="${pageContext.request.contextPath}/checkout">
+            <button>Checkout</button>
+        </form>
+        <form id="deleteCartItem" method="post">
+        </form>
+    </c:if>
 </tags:master>

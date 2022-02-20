@@ -1,9 +1,9 @@
-package com.es.phoneshop.model.product.cart;
+package com.es.phoneshop.model.cart;
 
-import com.es.phoneshop.model.product.ArrayListProductDao;
+import com.es.phoneshop.model.dao.impl.ArrayListProductDao;
 import com.es.phoneshop.model.product.OutOfStockExeption;
 import com.es.phoneshop.model.product.Product;
-import com.es.phoneshop.model.product.ProductDao;
+import com.es.phoneshop.model.dao.ProductDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Currency;
 
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultCartServiceTest {

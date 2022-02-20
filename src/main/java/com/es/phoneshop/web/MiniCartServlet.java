@@ -1,7 +1,7 @@
 package com.es.phoneshop.web;
 
-import com.es.phoneshop.model.product.cart.CartService;
-import com.es.phoneshop.model.product.cart.DefaultCartService;
+import com.es.phoneshop.model.cart.CartService;
+import com.es.phoneshop.model.cart.DefaultCartService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 
 public class MiniCartServlet extends HttpServlet {
     private CartService cartService;
@@ -22,13 +21,13 @@ public class MiniCartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        cartService.getCart(req);
+        req.setAttribute("cart", cartService.getCart(req));
         req.getRequestDispatcher("/WEB-INF/pages/minicart.jsp").include(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        cartService.getCart(req);
+        req.setAttribute("cart", cartService.getCart(req));
         req.getRequestDispatcher("/WEB-INF/pages/minicart.jsp").include(req, resp);
     }
 }

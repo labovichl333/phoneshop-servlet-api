@@ -1,8 +1,8 @@
 package com.es.phoneshop.model.product.viewed_products;
 
-import com.es.phoneshop.model.product.ArrayListProductDao;
+import com.es.phoneshop.model.dao.impl.ArrayListProductDao;
 import com.es.phoneshop.model.product.Product;
-import com.es.phoneshop.model.product.ProductDao;
+import com.es.phoneshop.model.dao.ProductDao;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

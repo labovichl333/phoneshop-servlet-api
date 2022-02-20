@@ -1,4 +1,4 @@
-package com.es.phoneshop.model.product.cart;
+package com.es.phoneshop.model.cart;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -34,6 +34,10 @@ public class Cart implements Serializable {
 
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public void setItems(List<CartItem> items) {
+        this.items = items;
     }
 
     @Override
