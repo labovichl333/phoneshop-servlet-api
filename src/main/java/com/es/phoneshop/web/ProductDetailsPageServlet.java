@@ -1,15 +1,14 @@
 package com.es.phoneshop.web;
 
-import com.es.phoneshop.model.product.ArrayListProductDao;
+import com.es.phoneshop.model.cart.Cart;
+import com.es.phoneshop.model.cart.CartService;
+import com.es.phoneshop.model.cart.DefaultCartService;
+import com.es.phoneshop.model.dao.impl.ArrayListProductDao;
 import com.es.phoneshop.model.product.OutOfStockExeption;
-import com.es.phoneshop.model.product.ProductDao;
-import com.es.phoneshop.model.product.cart.Cart;
-import com.es.phoneshop.model.product.cart.CartService;
-import com.es.phoneshop.model.product.cart.DefaultCartService;
+import com.es.phoneshop.model.dao.ProductDao;
 import com.es.phoneshop.model.product.viewed_products.DefaultViewedProductsService;
 import com.es.phoneshop.model.product.viewed_products.ViewedProductsHolder;
 import com.es.phoneshop.model.product.viewed_products.ViewedProductsService;
-
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -40,6 +39,7 @@ public class ProductDetailsPageServlet extends HttpServlet {
         ViewedProductsHolder holder = viewedProductsService.getViewedProductsHolder(req);
         viewedProductsService.addViewedProduct(holder, productId);
         req.setAttribute("product", productDao.getProduct(productId));
+        req.setAttribute("viewedProducts", viewedProductsService.getViewedProductsHolder(req));
         req.getRequestDispatcher("/WEB-INF/pages/product.jsp").forward(req, resp);
     }
 

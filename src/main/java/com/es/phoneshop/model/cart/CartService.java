@@ -1,4 +1,4 @@
-package com.es.phoneshop.model.product.cart;
+package com.es.phoneshop.model.cart;
 
 import com.es.phoneshop.model.product.OutOfStockExeption;
 
@@ -9,7 +9,9 @@ public interface CartService {
 
     void add(Cart cart, Long productId, int quantity) throws OutOfStockExeption, IllegalArgumentException;
 
-    void update(Cart cart, Long productId, int quantity) throws OutOfStockExeption,IllegalArgumentException;
+    void update(Cart cart, Long productId, int quantity) throws OutOfStockExeption, IllegalArgumentException;
 
     void delete(Cart cart, Long productId);
+
+    void cleanCart(Cart cart);
 }

@@ -1,7 +1,7 @@
 package com.es.phoneshop.web;
 
-import com.es.phoneshop.model.product.ArrayListProductDao;
-import com.es.phoneshop.model.product.ProductDao;
+import com.es.phoneshop.model.dao.impl.ArrayListProductDao;
+import com.es.phoneshop.model.dao.ProductDao;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,12 +25,10 @@ public class DeleteCartItemServletTest {
     private HttpServletRequest request;
     @Mock
     private HttpServletResponse response;
-
     @Mock
     private ServletConfig servletConfig;
     @Mock
     private HttpSession session;
-
 
     private DeleteCartItemServlet servlet = new DeleteCartItemServlet();
     private ProductDao productDao = ArrayListProductDao.getInstance();
