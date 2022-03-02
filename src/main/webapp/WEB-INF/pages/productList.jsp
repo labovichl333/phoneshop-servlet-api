@@ -23,6 +23,7 @@
         <input name="query" value="${param.query}">
         <button>Search</button>
     </form>
+    <a  href="${pageContext.servletContext.contextPath}/advancedSearch">Advanced Search"</a>
     <table>
         <thead>
         <tr>
