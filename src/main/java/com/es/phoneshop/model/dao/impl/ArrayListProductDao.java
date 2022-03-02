@@ -9,6 +9,7 @@ import com.es.phoneshop.model.product.ProductNotFoundExeption;
 import com.es.phoneshop.model.product.SortField;
 import com.es.phoneshop.model.product.SortOrder;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -30,6 +31,28 @@ public class ArrayListProductDao extends AbstractDao<Product> implements Product
             throw new ProductNotFoundExeption(id);
         }
         return product;
+    }
+
+    @Override
+    public List<Product> findProductsByAdvancedSearch(String productCode, BigDecimal minPrice, BigDecimal maxPrice, int minStock) {
+        String[] productCodeWords;
+        if (productCode == null) {
+            productCodeWords = new String[]{};
+        } else {
+            productCodeWords = productCode.replaceAll("\\s+", " ").split("\\s");
+        }
+        return items.stream()
+                .filter(this::productHasPrice)
+                .filter(this::productIsInStock)
+                .filter(product -> product.getStock()>=minStock)
+                .filter(product -> minPrice == null || product.getPrice().compareTo(minPrice) >= 0)
+                .filter(product -> maxPrice == null || product.getPrice().compareTo(maxPrice) <= 0)
+                .filter(product ->productCodeWords.length==0 || productHasSuchProductCode(productCodeWords,product))
+                .collect(Collectors.toList());
+    }
+
+    private boolean productHasSuchProductCode( String[] productCodeWords,Product product){
+       return Arrays.stream(productCodeWords).anyMatch(productCode -> product.getCode().contains(productCode));
     }
 
     @Override

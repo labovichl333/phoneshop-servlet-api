@@ -6,6 +6,7 @@ import com.es.phoneshop.model.product.ProductNotFoundExeption;
 import com.es.phoneshop.model.product.SortField;
 import com.es.phoneshop.model.product.SortOrder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ProductDao {
@@ -16,4 +17,7 @@ public interface ProductDao {
     void save(Product product) throws NotExistIdExeption;
 
     void delete(Long id) throws ProductNotFoundExeption;
+
+    List<Product> findProductsByAdvancedSearch(String productCode, BigDecimal minPrice, BigDecimal maxPrice,
+                                               int minStock);
 }
